@@ -32,7 +32,7 @@
                             
                             <div class="form-group">
                                 <label>Tên thể loại</label>
-                                <input class="form-control" name="Ten" placeholder="Điền tên thể loại" value="{{$theloai->Ten}}" />
+                                <input class="form-control" name="Ten" placeholder="Điền tên thể loại" value="{{$loantin->Ten}}"  />
                             </div>
                             
                             

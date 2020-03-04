@@ -14,7 +14,14 @@ use App\TheLoai;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::group(['prefix' =>'admin'], function(){
+
+Route::get('admin/dangnhap','UserController@getDangnhapAdmin');
+
+Route::post('admin/dangnhap','UserController@postDangnhapAdmin');
+
+Route::get('admin/logout','UserController@getDangXuatAdmin');
+
+Route::group(['prefix' =>'admin','middleware'=>'adminLogin'], function(){
 	Route::group(['prefix' =>'theloai'], function(){	
 		//admin/theloai/danhsach
 		Route::get('danhsach','TheLoaiController@getDanhSach');
@@ -49,14 +56,33 @@ Route::group(['prefix' =>'admin'], function(){
 
 	Route::group(['prefix' =>'tintuc'], function(){	
 		//admin/theloai/them
-		Route::get('danhsach','TinTuciController@getDanhSach');
+		Route::get('danhsach','TinTucController@getDanhSach');
 
 		Route::get('sua','TinTucController@getSua');
 
 		Route::get('them','TinTucController@getThem');
+		Route::post('them','TinTucController@postThem');
 
 	});
+	Route::group(['prefix' =>'user'], function(){	
+		//admin/loai/them
+		Route::get('danhsach','UserController@getDanhSach');
 
+		Route::get('sua/{id}','UserController@getSua');
+		Route::post('sua/{id}','UserController@postSua');
+
+		Route::get('them','UserController@getThem');
+		Route::post('them','UserController@postThem');
+
+		Route::get('xoa/{id}','UserController@getXoa');
+	});
+
+
+	Route::group(['prefix'=>'ajax'], function(){
+		Route::get('loaitin/{idTheLoai}','AjaxController@getLoaiTin');
+
+
+	});
 
 
 });

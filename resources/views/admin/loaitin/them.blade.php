@@ -11,8 +11,26 @@
                         </h1>
                     </div>
                     <!-- /.col-lg-12 -->
-                    <div class="col-lg-7" style="padding-bottom:120px">                     
-                        <form action="" method="POST">                       
+                    <div class="col-lg-7" style="padding-bottom:120px"> 
+                       @if(count($errors)>0)
+                        <div class="alert alert-danger">
+                            @foreach($errors ->all() as $err)
+                                {{$err}} <br>
+
+                            @endforeach
+
+                        </div>
+                        @endif
+
+                        @if(session('thongbao'))
+                        <div class="alret alert-success">
+                            {{session('thongbao')}}
+                            
+                        </div>
+
+                        @endif                    
+                        <form action="admin/loaitin/them" method="POST">    
+                        <input type="hidden" name="_token" value="{{csrf_token()}}" />                   
 
                             <div class="form-group">
                                 <label>Thể loại</label>
@@ -24,7 +42,7 @@
                             </div>                        
                             <div class="form-group">
                                 <label>Tên Loại Tin</label>
-                                <input class="form-control" name="Ten" placeholder="Nhập tên loại tin" />
+                                <input class="form-control" name="Ten" placeholder="Nhập tên thể loại" />
                             </div>                           
                             
                             <button type="submit" class="btn btn-default">Thêm</button>

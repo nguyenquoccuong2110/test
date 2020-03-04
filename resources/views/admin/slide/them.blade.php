@@ -1,4 +1,4 @@
-@extends('admin.layou.index')
+@extends('admin.layout.index')
 
 @section('content')
 <!-- Page Content -->
